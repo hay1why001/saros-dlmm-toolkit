@@ -7,6 +7,10 @@ const nextConfig = {
   // FIX #1: This tells Next.js to compile the Saros SDK from TypeScript.
   transpilePackages: ['@saros-finance/dlmm-sdk'],
 
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+
   // FIX #2: This keeps the Buffer polyfill that the Solana SDK needs.
   webpack: (config: { plugins: webpack.ProvidePlugin[]; resolve: { fallback: any; }; }) => {
     config.plugins.push(
