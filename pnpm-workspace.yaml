@@ -1,0 +1,7 @@
+onlyBuiltDependencies:
+  - bufferutil
+  - utf-8-validate
+  - blake-hash
+  - protobufjs
+  - tiny-secp256k1
+  - usb

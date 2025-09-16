@@ -1,0 +1,23 @@
+async function promiseAllInBatches<T>(
+  tasks: (() => Promise<T>)[],
+  batchSize: number,
+  delayMs: number
+): Promise<T[]> {
+  let position = 0;
+  let results: T[] = [];
+  while (position < tasks.length) {
+    const tasksForBatch = tasks.slice(position, position + batchSize);
+    console.log(
+      `Processing batch of ${tasksForBatch.length} starting at position ${position}...`
+    );
+    results = [
+      ...results,
+      ...(await Promise.all(tasksForBatch.map((task) => task()))),
+    ];
+    position += batchSize;
+    if (position < tasks.length) {
+      await new Promise((resolve) => setTimeout(resolve, delayMs));
+    }
+  }
+  return results;
+}
